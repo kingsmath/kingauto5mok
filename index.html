@@ -250,6 +250,14 @@
                     <label class="format-label"><input type="radio" name="matchFormat" value="5"> 5판 3선승</label>
                 </div>
 
+                <div class="text-xs text-neutral-400 font-bold mb-2 tracking-wider">경기 시간 제한</div>
+                <div class="format-selection" style="margin-bottom: 2rem;">
+                    <label class="format-label"><input type="radio" name="timeLimit" value="10"> 10초</label>
+                    <label class="format-label"><input type="radio" name="timeLimit" value="20"> 20초</label>
+                    <label class="format-label"><input type="radio" name="timeLimit" value="30"> 30초</label>
+                    <label class="format-label"><input type="radio" name="timeLimit" value="0" checked> 무제한</label>
+                </div>
+
                 <button class="btn-start" onclick="startTournament()">토너먼트 대진 생성</button>
                 <a href="https://킹수학.com" target="_self" class="btn-other-game">🎮 다른 게임 고르기</a>
             </div>
@@ -320,15 +328,20 @@
                     <div id="game-ui-1" class="game-ui" style="display:none;">
                         <div class="player-info" id="p1-info-1">
                             <div class="info-bg"><span class="text-3xl block mb-1" id="p1-icon-1"></span><span class="text-sm block truncate font-sans text-white font-bold" id="p1-name-1"></span><div class="p-stone-preview mx-auto" id="p1-stone-1"></div></div>
+                            <div id="timer-p1-1" class="text-sm font-bold text-red-400 mt-1.5 px-2 py-0.5 rounded-full bg-red-950/40 border border-red-800/40 hidden animate-pulse">⏱️ 10초</div>
                             <button id="undo-btn-p1-1" class="mt-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold py-1 px-2.5 rounded text-xs transition-all shadow-md hidden" onclick="undoLastMove(1)">무르기</button>
                         </div>
                         <div id="board-1" class="omok-board"></div>
                         <div class="player-info" id="p2-info-1">
                             <div class="info-bg"><span class="text-3xl block mb-1" id="p2-icon-1"></span><span class="text-sm block truncate font-sans text-white font-bold" id="p2-name-1"></span><div class="p-stone-preview mx-auto" id="p2-stone-1"></div></div>
+                            <div id="timer-p2-1" class="text-sm font-bold text-red-400 mt-1.5 px-2 py-0.5 rounded-full bg-red-950/40 border border-red-800/40 hidden animate-pulse">⏱️ 10초</div>
                             <button id="undo-btn-p2-1" class="mt-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold py-1 px-2.5 rounded text-xs transition-all shadow-md hidden" onclick="undoLastMove(1)">무르기</button>
                         </div>
                     </div>
-                    <div id="alert-screen-1" class="absolute inset-0 bg-black/95 flex flex-col justify-center items-center p-3 text-center z-[60]" style="display:none;"><h3 id="alert-msg-1" class="text-2xl font-bold text-white mb-5 font-sans leading-relaxed"></h3><button id="alert-btn-1" class="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-8 py-3 rounded-lg text-lg font-sans"></button></div>
+                    <div id="alert-screen-1" class="absolute inset-0 bg-black/95 flex flex-col justify-center items-center p-4 text-center z-[60]" style="display:none;">
+                        <h3 id="alert-msg-1" class="text-xl font-bold text-white mb-6 font-sans leading-relaxed"></h3>
+                        <div id="alert-btns-1" class="flex gap-4 justify-center w-full max-w-[280px]"></div>
+                    </div>
                 </div>
             </div>
 
@@ -361,15 +374,20 @@
                     <div id="game-ui-2" class="game-ui" style="display:none;">
                         <div class="player-info" id="p1-info-2">
                             <div class="info-bg"><span class="text-3xl block mb-1" id="p1-icon-2"></span><span class="text-sm block truncate font-sans text-white font-bold" id="p1-name-2"></span><div class="p-stone-preview mx-auto" id="p1-stone-2"></div></div>
+                            <div id="timer-p1-2" class="text-sm font-bold text-red-400 mt-1.5 px-2 py-0.5 rounded-full bg-red-950/40 border border-red-800/40 hidden animate-pulse">⏱️ 10초</div>
                             <button id="undo-btn-p1-2" class="mt-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold py-1 px-2.5 rounded text-xs transition-all shadow-md hidden" onclick="undoLastMove(2)">무르기</button>
                         </div>
                         <div id="board-2" class="omok-board"></div>
                         <div class="player-info" id="p2-info-2">
                             <div class="info-bg"><span class="text-3xl block mb-1" id="p2-icon-2"></span><span class="text-sm block truncate font-sans text-white font-bold" id="p2-name-2"></span><div class="p-stone-preview mx-auto" id="p2-stone-2"></div></div>
+                            <div id="timer-p2-2" class="text-sm font-bold text-red-400 mt-1.5 px-2 py-0.5 rounded-full bg-red-950/40 border border-red-800/40 hidden animate-pulse">⏱️ 10초</div>
                             <button id="undo-btn-p2-2" class="mt-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold py-1 px-2.5 rounded text-xs transition-all shadow-md hidden" onclick="undoLastMove(2)">무르기</button>
                         </div>
                     </div>
-                    <div id="alert-screen-2" class="absolute inset-0 bg-black/95 flex flex-col justify-center items-center p-3 text-center z-[60]" style="display:none;"><h3 id="alert-msg-2" class="text-2xl font-bold text-white mb-5 font-sans leading-relaxed"></h3><button id="alert-btn-2" class="bg-orange-500 hover:bg-orange-600 text-black font-bold px-8 py-3 rounded-lg text-lg font-sans"></button></div>
+                    <div id="alert-screen-2" class="absolute inset-0 bg-black/95 flex flex-col justify-center items-center p-4 text-center z-[60]" style="display:none;">
+                        <h3 id="alert-msg-2" class="text-xl font-bold text-white mb-6 font-sans leading-relaxed"></h3>
+                        <div id="alert-btns-2" class="flex gap-4 justify-center w-full max-w-[280px]"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -402,6 +420,7 @@
         let totalRounds = 0;
         let matchFormat = 1;
         let targetWins = 1;
+        let globalTimeLimit = 0; // 경기 시간 제한 (초, 0은 무제한)
         let globalMatchCounter = 1;
 
         let boardMatches = { 1: null, 2: null };
@@ -568,6 +587,7 @@
 
             matchFormat = parseInt(document.querySelector('input[name="matchFormat"]:checked').value);
             targetWins = Math.ceil(matchFormat / 2);
+            globalTimeLimit = parseInt(document.querySelector('input[name="timeLimit"]:checked').value);
 
             document.getElementById('screen-input').classList.remove('active');
             document.getElementById('screen-game').classList.add('active');
@@ -937,6 +957,7 @@
             drawBoardCells(bId);
             refreshTurnGlowUI(bId);
             updateUndoButtonsVisibility(bId); // 무르기 버튼 상태 업데이트
+            startTurnTimer(bId); // 타이머 작동 시작
         }
 
         function setPlayerWidget(bId, prefix, name, animal) {
@@ -999,6 +1020,7 @@
 
             if (evaluateWinRules(bId, r, c, turnIdx)) {
                 bm.stage = 'round_ended';
+                clearBoardTimer(bId); // 승리 시 타이머 정지
                 updateUndoButtonsVisibility(bId); // 승리 시 무르기 버튼 감추기
                 processMatchScoreResult(bId, turnIdx);
                 return;
@@ -1007,6 +1029,7 @@
             bm.turn = turnIdx === 1 ? 2 : 1;
             refreshTurnGlowUI(bId);
             updateUndoButtonsVisibility(bId); // 무르기 버튼 상태 업데이트
+            startTurnTimer(bId); // 다음 턴 타이머 시작
         }
 
         function evaluateWinRules(bId, r, c, targetPlayer) {
@@ -1072,6 +1095,7 @@
             playBeep();
             refreshTurnGlowUI(bId);
             updateUndoButtonsVisibility(bId);
+            startTurnTimer(bId); // 무르기 후 타이머 다시 작동
         }
 
         function updateUndoButtonsVisibility(bId) {
@@ -1095,6 +1119,70 @@
                 undoP1.classList.add('hidden');
                 undoP2.classList.remove('hidden');
             }
+        }
+
+        function startTurnTimer(bId) {
+            let bm = boardMatches[bId];
+            if (!bm || bm.stage !== 'playing') return;
+
+            clearBoardTimer(bId);
+
+            if (globalTimeLimit === 0) return;
+
+            bm.timeLeft = globalTimeLimit;
+            const activePrefix = bm.turn === 1 ? 'p1' : 'p2';
+            const timerEl = document.getElementById(`timer-${activePrefix}-${bId}`);
+            if (timerEl) {
+                timerEl.textContent = `⏱️ ${bm.timeLeft}초`;
+                timerEl.classList.remove('hidden');
+            }
+
+            bm.timerInterval = setInterval(() => {
+                let currentBm = boardMatches[bId];
+                if (!currentBm || currentBm.stage !== 'playing') {
+                    if (currentBm && currentBm.timerInterval) {
+                        clearInterval(currentBm.timerInterval);
+                        currentBm.timerInterval = null;
+                    }
+                    return;
+                }
+                currentBm.timeLeft--;
+                const curActivePrefix = currentBm.turn === 1 ? 'p1' : 'p2';
+                const curTimerEl = document.getElementById(`timer-${curActivePrefix}-${bId}`);
+                if (currentBm.timeLeft <= 0) {
+                    clearInterval(currentBm.timerInterval);
+                    currentBm.timerInterval = null;
+                    if (curTimerEl) curTimerEl.classList.add('hidden');
+                    passTurnOnTimeout(bId);
+                } else {
+                    if (curTimerEl) {
+                        curTimerEl.textContent = `⏱️ ${currentBm.timeLeft}초`;
+                    }
+                }
+            }, 1000);
+        }
+
+        function clearBoardTimer(bId) {
+            let bm = boardMatches[bId];
+            if (bm && bm.timerInterval) {
+                clearInterval(bm.timerInterval);
+                bm.timerInterval = null;
+            }
+            const t1 = document.getElementById(`timer-p1-${bId}`);
+            const t2 = document.getElementById(`timer-p2-${bId}`);
+            if (t1) t1.classList.add('hidden');
+            if (t2) t2.classList.add('hidden');
+        }
+
+        function passTurnOnTimeout(bId) {
+            let bm = boardMatches[bId];
+            if (!bm || bm.stage !== 'playing') return;
+
+            playBeep();
+            bm.turn = bm.turn === 1 ? 2 : 1;
+            refreshTurnGlowUI(bId);
+            updateUndoButtonsVisibility(bId);
+            startTurnTimer(bId);
         }
 
         function processMatchScoreResult(bId, roundWinnerNum) {
@@ -1121,12 +1209,47 @@
 
         function triggerLocalAlertUI(bId, textHTML, textBtn, nextEvent) {
             document.getElementById(`alert-msg-${bId}`).innerHTML = textHTML;
-            document.getElementById(`alert-btn-${bId}`).innerText = textBtn;
+            const btnsContainer = document.getElementById(`alert-btns-${bId}`);
+            if (btnsContainer) {
+                btnsContainer.innerHTML = '';
+                const btn = document.createElement('button');
+                btn.className = `font-bold px-6 py-2.5 rounded-lg text-base font-sans cursor-pointer transition-all hover:scale-105 ${bId === 1 ? 'bg-cyan-500 hover:bg-cyan-600 text-black' : 'bg-orange-500 hover:bg-orange-600 text-black'}`;
+                btn.innerText = textBtn;
+                btn.onclick = () => {
+                    document.getElementById(`alert-screen-${bId}`).style.display = 'none';
+                    nextEvent();
+                };
+                btnsContainer.appendChild(btn);
+            }
             document.getElementById(`alert-screen-${bId}`).style.display = 'flex';
-            document.getElementById(`alert-btn-${bId}`).onclick = () => {
-                document.getElementById(`alert-screen-${bId}`).style.display = 'none';
-                nextEvent();
-            };
+        }
+
+        function triggerLocalConfirmUI(bId, textHTML, okText, cancelText, onOk, onCancel) {
+            document.getElementById(`alert-msg-${bId}`).innerHTML = textHTML;
+            const btnsContainer = document.getElementById(`alert-btns-${bId}`);
+            if (btnsContainer) {
+                btnsContainer.innerHTML = '';
+                
+                const cancelBtn = document.createElement('button');
+                cancelBtn.className = "bg-neutral-700 hover:bg-neutral-600 text-white font-bold px-5 py-2.5 rounded-lg text-sm font-sans cursor-pointer transition-all hover:scale-105";
+                cancelBtn.innerText = cancelText;
+                cancelBtn.onclick = () => {
+                    document.getElementById(`alert-screen-${bId}`).style.display = 'none';
+                    if (onCancel) onCancel();
+                };
+                
+                const okBtn = document.createElement('button');
+                okBtn.className = "bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm font-sans cursor-pointer transition-all hover:scale-105";
+                okBtn.innerText = okText;
+                okBtn.onclick = () => {
+                    document.getElementById(`alert-screen-${bId}`).style.display = 'none';
+                    onOk();
+                };
+                
+                btnsContainer.appendChild(cancelBtn);
+                btnsContainer.appendChild(okBtn);
+            }
+            document.getElementById(`alert-screen-${bId}`).style.display = 'flex';
         }
 
         function forfeitBoardGame(bId, pNum) {
@@ -1137,14 +1260,24 @@
             let match = tournamentData[bm.r][bm.m];
             let name = pNum === 1 ? match.p1 : match.p2;
 
-            showGameModal({
-                message: `[제 ${match.id}경기]<br><span style="color:#ff8080">${name}</span> 선수가 기권하겠습니까?`,
-                okText: '🏳 기권',
-                cancelText: '취소',
-                okClass: 'gm-ok-red',
-                onOk: () => {
+            // 대국 진행 중인 경우 타이머 일시정지
+            const wasPlaying = bm.stage === 'playing';
+            let savedTimeLeft = bm.timeLeft;
+            if (wasPlaying && bm.timerInterval) {
+                clearInterval(bm.timerInterval);
+                bm.timerInterval = null;
+            }
+
+            triggerLocalConfirmUI(
+                bId,
+                `[제 ${match.id}경기]<br><span style="color:#ff8080">${name}</span> 선수가 기권하시겠습니까?`,
+                '🏳 기권',
+                '취소',
+                // 기권 확인
+                () => {
                     const opposite = pNum === 1 ? 2 : 1;
                     bm.stage = 'round_ended';
+                    clearBoardTimer(bId); // 기권 확정 시 타이머 완전 정리
                     if (opposite === 1) bm.p1Score = targetWins; else bm.p2Score = targetWins;
 
                     let luckyWinner = opposite === 1 ? match.p1 : match.p2;
@@ -1161,8 +1294,44 @@
                         updateUpperRounds(); boardMatches[bId] = null;
                         findAndAssignMatches();
                     });
+                },
+                // 기권 취소
+                () => {
+                    // 타이머 복구
+                    if (wasPlaying && globalTimeLimit > 0) {
+                        bm.timeLeft = savedTimeLeft;
+                        const activePrefix = bm.turn === 1 ? 'p1' : 'p2';
+                        const timerEl = document.getElementById(`timer-${activePrefix}-${bId}`);
+                        if (timerEl) {
+                            timerEl.textContent = `⏱️ ${bm.timeLeft}초`;
+                            timerEl.classList.remove('hidden');
+                        }
+                        bm.timerInterval = setInterval(() => {
+                            let currentBm = boardMatches[bId];
+                            if (!currentBm || currentBm.stage !== 'playing') {
+                                if (currentBm && currentBm.timerInterval) {
+                                    clearInterval(currentBm.timerInterval);
+                                    currentBm.timerInterval = null;
+                                }
+                                return;
+                            }
+                            currentBm.timeLeft--;
+                            const curActivePrefix = currentBm.turn === 1 ? 'p1' : 'p2';
+                            const curTimerEl = document.getElementById(`timer-${curActivePrefix}-${bId}`);
+                            if (currentBm.timeLeft <= 0) {
+                                clearInterval(currentBm.timerInterval);
+                                currentBm.timerInterval = null;
+                                if (curTimerEl) curTimerEl.classList.add('hidden');
+                                passTurnOnTimeout(bId);
+                            } else {
+                                if (curTimerEl) {
+                                    curTimerEl.textContent = `⏱️ ${currentBm.timeLeft}초`;
+                                }
+                            }
+                        }, 1000);
+                    }
                 }
-            });
+            );
         }
 
         function updateStationHeaders() {
